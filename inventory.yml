@@ -1,0 +1,10 @@
+all:
+  children:
+    linux:
+      hosts:
+        linux-server-01:
+          ansible_host: 10.32.20.101
+          ansible_user: dt
+          ansible_port: 22                               # Optional; default for SSH
+          ansible_connection: ssh                        # Optional; default for Linux
+          ansible_ssh_private_key_file: ~/.ssh/id_rsa    # Optional; default for Linux

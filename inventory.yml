@@ -8,3 +8,5 @@ all:
           ansible_port: 22                               # Optional; default for SSH
           ansible_connection: ssh                        # Optional; default for Linux
           ansible_ssh_private_key_file: ~/.ssh/id_rsa    # Optional; default for Linux
+          ansible_become: yes                            # Tells Ansible to use privilege escalation (sudo)
+          ansible_become_method: sudo                    # Defines sudo as the method (default is already sudo)

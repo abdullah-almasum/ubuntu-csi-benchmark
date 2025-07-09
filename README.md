@@ -37,3 +37,7 @@ all:
           ansible_user: Target UserName
           ansible_port: 22
           ansible_connection: ssh
+
+#Run the Playbook
+-----------------
+ansible-playbook -i inventory.yml ubutu-cis-benchmark.yml

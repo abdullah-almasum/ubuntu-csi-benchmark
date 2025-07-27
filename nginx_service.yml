@@ -2,10 +2,17 @@
   hosts: linux
   become: yes
   vars:
-    nginx_enabled: true  # change to false to disable nginx
+    nginx_enabled: true  # Set to false if you want to stop and disable NGINX
 
   tasks:
     - name: Install NGINX
       apt:
         name: nginx
         state: present
+        update_cache: yes
+
+    - name: Ensure NGINX is {{ 'started and enabled' if nginx_enabled else 'stopped and disabled' }}
+      service:
+        name: nginx
+        state: "{{ 'started' if nginx_enabled else 'stopped' }}"
+        enabled: "{{ nginx_enabled }}"

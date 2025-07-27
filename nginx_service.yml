@@ -2,17 +2,20 @@
   hosts: linux
   become: yes
   vars:
-    nginx_enabled: true  # Set to false if you want to stop and disable NGINX
+    nginx_enabled: true
 
   tasks:
-    - name: Install NGINX
+    - name: Update APT cache and install NGINX
       apt:
         name: nginx
         state: present
         update_cache: yes
+      become: yes   # Explicitly elevate privilege
 
     - name: Ensure NGINX is {{ 'started and enabled' if nginx_enabled else 'stopped and disabled' }}
       service:
         name: nginx
         state: "{{ 'started' if nginx_enabled else 'stopped' }}"
         enabled: "{{ nginx_enabled }}"
+      become: yes   # Explicitly elevate privilege
+

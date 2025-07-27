@@ -8,9 +8,3 @@
         name: nginx
         state: started      #Enable and started
         enabled: yes
-        
-    - name: Ensure nginx is stopped and disable
-      service:
-        name: nginx
-        state: stopped      #Disable and stopped 
-        enabled: no

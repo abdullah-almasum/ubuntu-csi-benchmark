@@ -1,5 +1,5 @@
 - name: Manage NGINX state
-  hosts: linux
+  hosts: linux-server-01
   become: yes
   vars:
     nginx_enabled: true

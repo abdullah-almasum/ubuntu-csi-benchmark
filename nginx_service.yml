@@ -1,21 +1,32 @@
-- name: Manage NGINX state
+---
+- name: Setup Ubuntu Server and Manage NGINX
   hosts: linux-server-01
   become: yes
   vars:
-    nginx_enabled: true
+    nginx_enabled: true   # Set to false to disable/stop nginx
 
   tasks:
-    - name: Update APT cache and install NGINX
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600  # Cache validity in seconds
+
+    - name: Upgrade all packages (dist-upgrade)
+      apt:
+        upgrade: dist
+        autoremove: yes
+        autoclean: yes
+
+    - name: Install NGINX
       apt:
         name: nginx
         state: present
         update_cache: yes
-      become: yes   # Explicitly elevate privilege
 
     - name: Ensure NGINX is {{ 'started and enabled' if nginx_enabled else 'stopped and disabled' }}
       service:
         name: nginx
         state: "{{ 'started' if nginx_enabled else 'stopped' }}"
         enabled: "{{ nginx_enabled }}"
-      become: yes   # Explicitly elevate privilege
+
 

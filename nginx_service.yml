@@ -3,7 +3,7 @@
   hosts: linux-server-01
   become: yes
   vars:
-    nginx_enabled: true   # Set to false to disable/stop nginx
+    nginx_enabled: false   # Set to false to disable/stop nginx
 
   tasks:
     - name: Update apt cache

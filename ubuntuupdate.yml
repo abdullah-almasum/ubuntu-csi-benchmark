@@ -1,0 +1,16 @@
+---
+- name: Setup Ubuntu Server
+  hosts: linux-server-01
+  become: yes       # escalate to sudo
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600  # 1 hour
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+        autoremove: yes
+        autoclean: yes
+
